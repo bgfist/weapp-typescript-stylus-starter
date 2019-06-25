@@ -1,0 +1,61 @@
+{
+	"wechat:page": {
+		"scope": "typescript",
+		"prefix": "page",
+		"body": [
+			"import WXPage from \"../../page\"",
+			"",
+			"interface Data {}",
+			"",
+			"class ${TM_FILENAME_BASE/(^|-|_)([a-z])/${2:/upcase}/g}Page extends WXPage<Data> {",
+			"\tpublic data: Data = {}",
+			"}",
+			"",
+			"new ${TM_FILENAME_BASE/(^|-|_)([a-z])/${2:/upcase}/g}Page().init()",
+			""
+		],
+		"description": "declare a demo WXPage class"
+	},
+	"wechat:component": {
+		"scope": "typescript",
+		"prefix": "comp",
+		"body": [
+			"import { WXComponent } from \"../../comp\"",
+			"",
+			"interface Properties {}",
+			"",
+			"interface Data {}",
+			"",
+			"class ${TM_FILENAME_BASE/(^|-|_)([a-z])/${2:/upcase}/g}Comp extends WXComponent<Properties, Data> {",
+			"\tpublic properties: Properties = {}",
+			"",
+			"\tpublic data: Data = {}",
+			"}",
+			"",
+			"new ${TM_FILENAME_BASE/(^|-|_)([a-z])/${2:/upcase}/g}Comp().init()",
+			""
+		],
+		"description": "declare a demo WXComponent class"
+	},
+	"wechat:behavior": {
+		"scope": "typescript",
+		"prefix": "mixin",
+		"body": [
+			"import { WXComponentBehavior } from \"../comp\"",
+			"",
+			"interface Properties {}",
+			"",
+			"interface Data {}",
+			"",
+			"class ${TM_FILENAME_BASE/(^|-|_)([a-z])/${2:/upcase}/g}Mixin extends WXComponentBehavior<Properties, Data> {",
+			"\tpublic properties: Properties = {}",
+			"",
+			"\tpublic data: Data = {}",
+			"}",
+			"",
+			"export default new ${TM_FILENAME_BASE/(^|-|_)([a-z])/${2:/upcase}/g}Mixin().init()",
+			""
+		],
+		"description": "declare a demo WXComponentBehavior(mixin) class"
+	}
+}

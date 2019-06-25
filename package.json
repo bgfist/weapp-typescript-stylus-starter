@@ -1,0 +1,41 @@
+{
+  "name": "weapp-typescript-stylus-starter",
+  "version": "1.0.1",
+  "scripts": {
+    "start": "npm run build:ts:watch & npm run build:styl:watch && fg",
+    "build": "npm run clean && npm run build:ts && npm run build:styl",
+    "build:ts": "tsc",
+    "build:ts:watch": "npm run build:ts -- -w",
+    "build:styl": "stylus `find src -name '*.styl'`",
+    "build:styl:watch": "npm run build:styl -- -w",
+    "clean": "rm -f `find src -name '*.js' -or -name '*.wxss' -or -name '*.js.map'`"
+  },
+  "devDependencies": {
+    "husky": "2.5.0",
+    "lint-staged": "8.2.1",
+    "minimist": "1.2.0",
+    "prettier": "1.18.2",
+    "stylus": "0.54.5",
+    "tslint": "5.18.0",
+    "tslint-config-prettier": "1.18.0",
+    "tslint-eslint-rules": "5.4.0",
+    "tslint-plugin-prettier": "2.0.1",
+    "typescript": "3.5.2",
+    "typescript-tslint-plugin": "0.5.2"
+  },
+  "lint-staged": {
+    "*.{ts}": [
+      "tslint --fix",
+      "git add"
+    ],
+    "*.{json,js,md}": [
+      "prettier --write",
+      "git add"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  }
+}

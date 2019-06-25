@@ -1,0 +1,5 @@
+<view class="container">
+  <view>{{name}}</view>
+  <view>{{mixinAge}}</view>
+  <view bindtap="onAgeTap">{{age}}</view>
+</view>

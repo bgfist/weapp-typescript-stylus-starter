@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "demo": "../../comps/demo/demo"
+  },
+  "navigationBarTitleText": "weapp-typescript-stylus-starter"
+}

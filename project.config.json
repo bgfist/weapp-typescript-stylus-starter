@@ -1,0 +1,37 @@
+{
+  "description": "项目配置文件",
+  "packOptions": {
+    "ignore": [
+      {
+        "type": "regexp",
+        "value": "\\.(ts|styl(us)?)$"
+      }
+    ]
+  },
+  "miniprogramRoot": "src/",
+  "compileType": "miniprogram",
+  "libVersion": "2.7.0",
+  "projectname": "weapp-typescript-stylus-starter",
+  "setting": {
+    "urlCheck": true,
+    "es6": false,
+    "postcss": true,
+    "minified": true,
+    "newFeature": true,
+    "coverView": true,
+    "autoAudits": false,
+    "checkInvalidKey": true,
+    "checkSiteMap": true,
+    "uploadWithSourceMap": true,
+    "babelSetting": {
+      "ignore": [],
+      "disablePlugins": [],
+      "outputPath": ""
+    },
+    "nodeModules": true
+  },
+  "appid": "wxc9eaa68e42c65bf0",
+  "simulatorType": "wechat",
+  "simulatorPluginLibVersion": {},
+  "condition": {}
+}

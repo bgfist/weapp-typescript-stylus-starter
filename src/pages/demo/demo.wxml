@@ -1,0 +1,9 @@
+<wxs src="../../wxs/demo.wxs" module="demo" />
+<view>
+  <view>{{userInfo.name}}</view>
+  <view>{{demo.double(userInfo.age)}}</view>
+  <view wx:for="{{materials}}" wx:key="{{index}}">
+    <text>{{item.title}}</text>
+  </view>
+  <demo />
+</view>

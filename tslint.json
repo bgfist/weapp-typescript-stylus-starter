@@ -1,0 +1,19 @@
+{
+  "extends": ["tslint:latest", "tslint-eslint-rules", "tslint-plugin-prettier", "tslint-config-prettier"],
+  "rules": {
+    "prettier": true,
+    "object-literal-sort-keys": false,
+    "ordered-imports": false,
+    "prefer-conditional-expression": false,
+    "no-shadowed-variable": false,
+    "interface-name": false,
+    "no-implicit-dependencies": false,
+    "no-submodule-imports": false,
+    "no-console": false,
+    "max-classes-per-file": false,
+    "no-empty-interface": false
+  },
+  "linterOptions": {
+    "exclude": ["src/wxs/*.wxs"]
+  }
+}
