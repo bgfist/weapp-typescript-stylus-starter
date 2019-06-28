@@ -1,6 +1,5 @@
 export function collectClassProps(obj: any, ...excludes: string[]) {
   const props: any = {}
-  // tslint:disable-next-line:forin
   for (const k in obj) {
     // @ts-ignore
     props[k] = obj[k]
@@ -24,4 +23,8 @@ export function splitFieldsAndMethods(obj: any) {
     fields,
     methods
   }
+}
+
+export function identity<T>(t: T) {
+  return t
 }

@@ -120,12 +120,12 @@ declare namespace Component {
      */
     properties?: P
 
-    data?: D
+    data: D
 
     methods?: { [name: string]: WXComponentMethod }
   }
 
-  interface WXComponentBehavior<P extends AnyObject = any, D extends AnyObject = any> extends WXComponentBehaviorConstructOptions<P,D>, WXComponentInstance<D> {}
+  interface WXComponentBehavior<P extends AnyObject = any, D extends AnyObject = any> extends WXComponentBehaviorConstructOptions<P, D>, WXComponentInstance<D> { }
 
   interface WXComponentInstance<D> {
     /**
@@ -185,15 +185,15 @@ declare namespace Component {
      */
     properties?: P
 
-    data?: D
+    data: D
 
     methods?: { [name: string]: WXComponentMethod }
 
-    observers?: { [keyPath in keyof (P | D)]: WXComponentObserver} & { [keyPath: string]: WXComponentObserver }
+    observers?: { [keyPath in keyof (P | D)]: WXComponentObserver } & { [keyPath: string]: WXComponentObserver }
 
-    lifetimes?: WXComponentConstructorOptions<P, D>
+    lifetimes?: WXComponentLifeCycle
 
-    pageLifetimes?: WXComponentConstructorOptions<P, D>
+    pageLifetimes?: WXComponentLifeCycle
 
     export?(): any
 
@@ -203,14 +203,14 @@ declare namespace Component {
   interface WXComponent<P extends AnyObject = any, D extends AnyObject = any> extends WXComponentConstructorOptions<P, D>, WXComponentInstance<D> { }
 
   interface WXComponentConstructor {
-    <P extends IAnyObject = any, D extends AnyObject = any>(
-      options: WXComponentConstructorOptions<P, D>
+    <P extends IAnyObject = any, D extends AnyObject = any, E extends AnyObject = any>(
+      options: WXComponentConstructorOptions<P, D> & E
     ): void
   }
 
   interface WXComponentBehaviorConstructor {
-    <P extends IAnyObject = any, D extends AnyObject = any>(
-      options: WXComponentBehaviorConstructOptions<P, D>
+    <P extends IAnyObject = any, D extends AnyObject = any, E extends AnyObject = any>(
+      options: WXComponentBehaviorConstructOptions<P, D> & E
     ): WXComponentBehavior
   }
 

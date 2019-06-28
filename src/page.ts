@@ -1,12 +1,47 @@
-import { collectClassProps } from "./utils/lang"
+import { collectClassProps, identity } from "./utils/lang"
 
-interface WXPage<T extends AnyObject = {}> extends Page.WXPage<T> {}
+interface WXPage<D extends AnyObject = never, A extends AnyObject = never> extends Page.WXPage<D> {
+  actions: A
+}
 
-class WXPage<T extends AnyObject = {}> {
-  public init() {
-    const options = collectClassProps(this, "init")
-    Page(options)
+class WXPage<D extends AnyObject = never, A extends AnyObject = never> {
+  public init(connect = identity) {
+    let props = collectClassProps(this, "init")
+
+    props = checkActionsProp(props)
+    props = checkForbiddenProps(props)
+    props = connect(props)
+    props = injectActions(props)
+
+    setTimeout(() => {
+      props["actions.addTest"]()
+    })
+
+    Page(props)
   }
+}
+
+function checkActionsProp(props: any) {
+  const { actions, ...others } = props
+  if (actions) {
+    throw new Error("WXComponent: 子类不应声明actions属性，这是给redux预留的，应当由redux注入")
+  }
+  return others
+}
+
+function checkForbiddenProps(props: any) {
+  const { route, setData, ...others } = props
+  if (route || setData) {
+    throw new Error("WXPage: 子类中覆盖了微信内部的属性或变量，请检查")
+  }
+  return others
+}
+
+function injectActions(props: any) {
+  for (const k in props.actions) {
+    props["actions." + k] = props.actions[k]
+  }
+  return props
 }
 
 export default WXPage

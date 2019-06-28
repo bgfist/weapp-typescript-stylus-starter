@@ -1,6 +1,13 @@
 import { WXComponent } from "../../comp"
 import DemoMixin from "../../mixins/demo"
 
+import { doubleTest } from "../../store/actions/index"
+import { connect } from "../../weapp-redux/index"
+
+const mapDispatchToActions = {
+  doubleTest
+}
+
 interface Properties {
   name: string
 }
@@ -10,7 +17,7 @@ interface Data {
   age: number
 }
 
-class DemoComp extends WXComponent<Properties, Data> {
+class DemoComp extends WXComponent<Properties, Data, typeof mapDispatchToActions> {
   public behaviors = [DemoMixin]
 
   public properties: Properties = {
@@ -42,4 +49,9 @@ class DemoComp extends WXComponent<Properties, Data> {
   }
 }
 
-new DemoComp().init()
+new DemoComp().init(
+  connect(
+    undefined,
+    mapDispatchToActions
+  )
+)

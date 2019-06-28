@@ -5,6 +5,10 @@
       {
         "type": "regexp",
         "value": "\\.(ts|styl(us)?)$"
+      },
+      {
+        "type": "regexp",
+        "value": "^package\\.json|\\.npmrc|package-lock\\.json|yarn\\.lock$"
       }
     ]
   },

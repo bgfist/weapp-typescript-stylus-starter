@@ -11,7 +11,8 @@
     "no-submodule-imports": false,
     "no-console": false,
     "max-classes-per-file": false,
-    "no-empty-interface": false
+    "no-empty-interface": false,
+    "forin": false
   },
   "linterOptions": {
     "exclude": ["src/wxs/*.wxs"]
