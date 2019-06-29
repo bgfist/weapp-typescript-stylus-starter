@@ -3,19 +3,7 @@ import { pageUrl } from "../../utils/route"
 import { Material } from "../../types"
 
 import { connect } from "../../weapp-redux/index"
-import { State } from "../../store/state/index"
-import { addTest, doubleTest } from "../../store/actions/index"
-
-function mapStateToData(state: State) {
-  return {
-    testNum: state.test.num
-  }
-}
-
-const mapDispatchToActions = {
-  addTest,
-  doubleTest
-}
+import { AppState, addTest, doubleTest } from "../../store/index"
 
 interface Data {
   userInfo: {
@@ -23,6 +11,15 @@ interface Data {
     age: number
   }
   materials: Material[]
+}
+
+const mapStateToData = (state: AppState) => ({
+  testNum: state.test.num
+})
+
+const mapDispatchToActions = {
+  addTest,
+  doubleTest
 }
 
 type RealData = Data & ReturnType<typeof mapStateToData>
@@ -65,8 +62,6 @@ class MinePage extends WXPage<RealData, typeof mapDispatchToActions> {
   }
 
   private onTap() {
-    console.log("onTap")
-    console.log(this.actions)
     this.actions.addTest(2)
   }
 }

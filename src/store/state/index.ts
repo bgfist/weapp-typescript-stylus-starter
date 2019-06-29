@@ -2,6 +2,4 @@ export interface TestState {
   num: number
 }
 
-export interface State {
-  test: TestState
-}
+export { AppState } from "../reducers/index"

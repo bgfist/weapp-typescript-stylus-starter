@@ -4,10 +4,6 @@ import DemoMixin from "../../mixins/demo"
 import { doubleTest } from "../../store/actions/index"
 import { connect } from "../../weapp-redux/index"
 
-const mapDispatchToActions = {
-  doubleTest
-}
-
 interface Properties {
   name: string
 }
@@ -15,6 +11,10 @@ interface Properties {
 interface Data {
   name: string
   age: number
+}
+
+const mapDispatchToActions = {
+  doubleTest
 }
 
 class DemoComp extends WXComponent<Properties, Data, typeof mapDispatchToActions> {

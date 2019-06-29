@@ -1,5 +1,6 @@
 import shallowEqual from "./shallowEqual"
 import wrapActionCreators from "./wrapActionCreators"
+import { Store, Unsubscribe } from "redux"
 
 const defaultMapStateToProps = (...args: any[]) => ({}) // eslint-disable-line no-unused-vars
 const defaultMapDispatchToProps = (...args: any[]) => ({})
@@ -9,12 +10,18 @@ type Mapper = (...args: any[]) => { [k: string]: any }
 interface DataResponser {
   data: any
   setData: (data: any) => void
+  $$weappReduxInner?: {
+    store: Store
+    unsubscribe: Unsubscribe
+    mapStateParams: any
+    hidden: boolean
+    pendingUpdate: boolean
+  }
 }
 
 export default function connect(mapStateToData?: Mapper, mapDispatchToActions?: Mapper | AnyObject) {
   const shouldSubscribe = Boolean(mapStateToData)
   const mapState = mapStateToData || defaultMapStateToProps
-  const app = getApp()
 
   let mapDispatch: Mapper
   if (typeof mapDispatchToActions === "function") {
@@ -26,37 +33,58 @@ export default function connect(mapStateToData?: Mapper, mapDispatchToActions?: 
   }
 
   return function wrapWithConnect(config: any) {
-    // hack，以此区分page和component
+    // hack，以此区分page和component，懒得传参数区分
     const origOnCreate = config.methods ? config.attached : config.onLoad
     const origOnDestroy = config.methods ? config.detached : config.onUnload
+    const origOnShow = config.methods ? config.pageLifetimes && config.pageLifetimes.show : config.onShow
+    const origOnHide = config.methods ? config.pageLifetimes && config.pageLifetimes.hide : config.onHide
 
-    const store = app.store
-    if (!store) {
-      throw new Error("Store对象不存在!")
-    }
-    let unsubscribe: AnyFunction
-
-    function handleChange(this: DataResponser, options: any) {
-      if (!unsubscribe) {
+    function handleChange(this: DataResponser, checkConflictData = false) {
+      if (!this.$$weappReduxInner) {
         return
       }
 
-      const mappedState = mapState(store.getState(), options)
-      if (!this.data || shallowEqual(this.data, mappedState)) {
+      if (this.$$weappReduxInner.hidden) {
+        this.$$weappReduxInner.pendingUpdate = true
         return
       }
 
-      // todo: 监听页面显示和隐藏，隐藏时不调用
+      const mappedState = mapState(this.$$weappReduxInner.store.getState(), this.$$weappReduxInner.mapStateParams)
+
+      if (checkConflictData) {
+        for (const key in mappedState) {
+          if (Object.prototype.hasOwnProperty.call(this.data, key)) {
+            throw new Error(`redux提供的数据和组件内部提供的数据重复了，重复字段为: ${key}`)
+          }
+        }
+      }
+
+      if (!this.data || shallowEqual(mappedState, this.data)) {
+        return
+      }
+
       this.setData(mappedState)
     }
 
     function onCreate(this: DataResponser, options: any) {
-      if (shouldSubscribe) {
-        unsubscribe = store.subscribe(handleChange.bind(this, options))
-        handleChange.call(this, options)
-      }
       if (typeof origOnCreate === "function") {
         origOnCreate.call(this, options)
+      }
+
+      if (shouldSubscribe) {
+        const store = getApp().store
+        if (!store) {
+          throw new Error("Store对象不存在!")
+        }
+
+        this.$$weappReduxInner = {
+          store,
+          unsubscribe: store.subscribe(handleChange.bind(this)),
+          mapStateParams: options,
+          pendingUpdate: false,
+          hidden: false
+        }
+        handleChange.call(this, true)
       }
     }
 
@@ -65,24 +93,39 @@ export default function connect(mapStateToData?: Mapper, mapDispatchToActions?: 
         origOnDestroy.call(this)
       }
 
-      if (unsubscribe) {
-        unsubscribe()
+      if (this.$$weappReduxInner) {
+        this.$$weappReduxInner.unsubscribe()
       }
     }
 
-    const hooks = config.methods ? { attached: onCreate, detached: onDestroy } : { onLoad: onCreate, onUnload: onDestroy }
+    function onShow(this: DataResponser) {
+      if (typeof origOnShow === "function") {
+        origOnShow.call(this)
+      }
 
-    function checkAndMergeData() {
-      const storeData = mapState(store.getState(), {})
-      const innerData = config.data
-      for (const k in storeData) {
-        if (innerData[k]) {
-          throw new Error("redux提供的数据字段和组件内部提供的数据字段重复了")
+      if (this.$$weappReduxInner) {
+        this.$$weappReduxInner.hidden = false
+        if (this.$$weappReduxInner.pendingUpdate) {
+          handleChange.call(this)
+          this.$$weappReduxInner.pendingUpdate = false
         }
       }
-      return { ...innerData, ...storeData }
     }
 
-    return { ...config, actions: mapDispatch(app.store.dispatch), ...hooks, data: checkAndMergeData() }
+    function onHide(this: DataResponser) {
+      if (typeof origOnHide === "function") {
+        origOnHide.call(this)
+      }
+
+      if (this.$$weappReduxInner) {
+        this.$$weappReduxInner.hidden = true
+      }
+    }
+
+    const hooks = config.methods
+      ? { attached: onCreate, detached: onDestroy, pageLifetimes: { show: onShow, hide: onHide } }
+      : { onLoad: onCreate, onUnload: onDestroy, onShow, onHide }
+
+    return { ...config, actions: mapDispatch(getApp().store.dispatch), ...hooks }
   }
 }

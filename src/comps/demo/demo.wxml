@@ -1,5 +1,6 @@
 <view class="container">
   <view>{{name}}</view>
   <view>{{mixinAge}}</view>
+  <view>{{mixinNum}}</view>
   <view bindtap="actions.doubleTest">{{age}}</view>
 </view>

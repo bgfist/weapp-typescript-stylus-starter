@@ -1,4 +1,6 @@
 import { WXComponentBehavior } from "../comp"
+import { AppState } from "../store/index"
+import { connect } from "../weapp-redux/index"
 
 interface Properties {
   mixinName: string
@@ -8,12 +10,19 @@ interface Data {
   mixinAge: number
 }
 
-class DemoComp extends WXComponentBehavior<Properties, Data> {
+const mapStateToData = (state: AppState) => ({
+  mixinNum: state.test.num
+})
+
+type RealData = Data & ReturnType<typeof mapStateToData>
+
+class DemoComp extends WXComponentBehavior<Properties, RealData> {
   public properties: Properties = {
     mixinName: "mixin"
   }
 
-  public data: Data = {
+  // @ts-ignore
+  public data: RealData = {
     mixinAge: 0
   }
 
@@ -26,4 +35,4 @@ class DemoComp extends WXComponentBehavior<Properties, Data> {
   }
 }
 
-export default new DemoComp().init()
+export default new DemoComp().init(connect(mapStateToData))

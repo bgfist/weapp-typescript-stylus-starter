@@ -1,12 +1,12 @@
 <wxs src="../../wxs/demo.wxs" module="demo" />
 <view>
   <view>基本信息</view>
-  <view bindtap="onTap">{{userInfo.name}}</view>
+  <view bindtap="onTap">{{fuck.name}}</view>
   <view>{{demo.double(userInfo.age)}}(wxs模块算出来的)</view>
   <view wx:for="{{materials}}" wx:key="{{index}}">
     <text>{{item.title}}</text>
   </view>
-  <view>全局信息</view>
+  <view bind:tap="onTap">全局信息</view>
   <view bindtap="actions.doubleTest">{{testNum}}</view>
   <view>组件</view>
   <demo />

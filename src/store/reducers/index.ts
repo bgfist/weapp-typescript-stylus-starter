@@ -1,6 +1,10 @@
 import { combineReducers } from "redux"
 import test from "./test"
 
-export default combineReducers({
+const rootReducer = combineReducers({
   test
 })
+
+export default rootReducer
+
+export type AppState = ReturnType<typeof rootReducer>

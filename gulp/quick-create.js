@@ -98,7 +98,7 @@ const createComponent = (parentPath, name) => {
 }
 
 function main(done) {
-  const options = minimist(process.argv.slice(2), {
+  const options = minimist(process.argv.slice(3), {
     boolean: ["p", "c", "help", "h"]
   })
   const { p, c, help, h, _ } = options
@@ -115,10 +115,12 @@ function main(done) {
   }
 
   if (p) {
-    return createPage(parentPath, name)
+    createPage(parentPath, name)
+    done()
   }
 
-  return createComponent(parentPath, name)
+  createComponent(parentPath, name)
+  done()
 }
 
 function usage() {

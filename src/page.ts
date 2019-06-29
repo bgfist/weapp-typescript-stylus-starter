@@ -13,10 +13,6 @@ class WXPage<D extends AnyObject = never, A extends AnyObject = never> {
     props = connect(props)
     props = injectActions(props)
 
-    setTimeout(() => {
-      props["actions.addTest"]()
-    })
-
     Page(props)
   }
 }

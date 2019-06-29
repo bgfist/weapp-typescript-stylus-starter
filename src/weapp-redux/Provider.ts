@@ -1,4 +1,4 @@
-import { Store, AnyAction } from "redux"
+import { Store } from "redux"
 
 export default function Provider(store: Store<any, any>) {
   return <D>(appConfig: App.AppInstance<D> & D) => {
