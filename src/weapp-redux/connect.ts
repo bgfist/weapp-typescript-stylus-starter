@@ -1,11 +1,9 @@
 import shallowEqual from "./shallowEqual"
 import wrapActionCreators from "./wrapActionCreators"
-import { Store, Unsubscribe } from "redux"
+import { Store, Unsubscribe, Config, MapStateToData, MapDispatchToActions } from "./types"
 
-const defaultMapStateToProps = (...args: any[]) => ({}) // eslint-disable-line no-unused-vars
-const defaultMapDispatchToProps = (...args: any[]) => ({})
-
-type Mapper = (...args: any[]) => { [k: string]: any }
+const defaultMapStateToData: MapStateToData = () => ({})
+const defaultMapDispatchToActions: MapDispatchToActions = () => ({})
 
 interface DataResponser {
   data: any
@@ -19,25 +17,28 @@ interface DataResponser {
   }
 }
 
-export default function connect(mapStateToData?: Mapper, mapDispatchToActions?: Mapper | AnyObject) {
+export default function connect(
+  mapStateToData = defaultMapStateToData,
+  mapDispatchToActions: MapDispatchToActions | AnyObject = defaultMapDispatchToActions
+) {
   const shouldSubscribe = Boolean(mapStateToData)
-  const mapState = mapStateToData || defaultMapStateToProps
 
-  let mapDispatch: Mapper
-  if (typeof mapDispatchToActions === "function") {
-    mapDispatch = mapDispatchToActions as Mapper
-  } else if (!mapDispatchToActions) {
-    mapDispatch = defaultMapDispatchToProps
-  } else {
-    mapDispatch = wrapActionCreators(mapDispatchToActions)
+  if (typeof mapDispatchToActions === "object") {
+    mapDispatchToActions = wrapActionCreators(mapDispatchToActions)
   }
 
-  return function wrapWithConnect(config: any) {
+  return function wrapWithConnect(config: Config, isComponent = false) {
+    const store = getApp().store
+    if (!store) {
+      throw new Error("Store对象不存在!")
+    }
+
     // hack，以此区分page和component，懒得传参数区分
-    const origOnCreate = config.methods ? config.attached : config.onLoad
-    const origOnDestroy = config.methods ? config.detached : config.onUnload
-    const origOnShow = config.methods ? config.pageLifetimes && config.pageLifetimes.show : config.onShow
-    const origOnHide = config.methods ? config.pageLifetimes && config.pageLifetimes.hide : config.onHide
+    isComponent = isComponent || Boolean(config.methods)
+    const origOnCreate = isComponent ? config.attached : config.onLoad
+    const origOnDestroy = isComponent ? config.detached : config.onUnload
+    const origOnShow = isComponent ? config.pageLifetimes && config.pageLifetimes.show : config.onShow
+    const origOnHide = isComponent ? config.pageLifetimes && config.pageLifetimes.hide : config.onHide
 
     function handleChange(this: DataResponser, checkConflictData = false) {
       if (!this.$$weappReduxInner) {
@@ -49,7 +50,7 @@ export default function connect(mapStateToData?: Mapper, mapDispatchToActions?: 
         return
       }
 
-      const mappedState = mapState(this.$$weappReduxInner.store.getState(), this.$$weappReduxInner.mapStateParams)
+      const mappedState = mapStateToData(this.$$weappReduxInner.store.getState(), this.$$weappReduxInner.mapStateParams)
 
       if (checkConflictData) {
         for (const key in mappedState) {
@@ -72,11 +73,6 @@ export default function connect(mapStateToData?: Mapper, mapDispatchToActions?: 
       }
 
       if (shouldSubscribe) {
-        const store = getApp().store
-        if (!store) {
-          throw new Error("Store对象不存在!")
-        }
-
         this.$$weappReduxInner = {
           store,
           unsubscribe: store.subscribe(handleChange.bind(this)),
@@ -122,10 +118,10 @@ export default function connect(mapStateToData?: Mapper, mapDispatchToActions?: 
       }
     }
 
-    const hooks = config.methods
+    const hooks = isComponent
       ? { attached: onCreate, detached: onDestroy, pageLifetimes: { show: onShow, hide: onHide } }
       : { onLoad: onCreate, onUnload: onDestroy, onShow, onHide }
 
-    return { ...config, actions: mapDispatch(getApp().store.dispatch), ...hooks }
+    return { ...config, actions: (mapDispatchToActions as MapDispatchToActions)(getApp().store.dispatch), ...hooks }
   }
 }

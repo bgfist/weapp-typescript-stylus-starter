@@ -178,13 +178,13 @@ declare namespace wx {
      * - 'utf-8/utf8': ;
      * - 'latin1': ; */
     encoding?:
-      | 'ascii'
-      | 'base64'
-      | 'binary'
-      | 'hex'
-      | 'ucs2/ucs-2/utf16le/utf-16le'
-      | 'utf-8/utf8'
-      | 'latin1';
+    | 'ascii'
+    | 'base64'
+    | 'binary'
+    | 'hex'
+    | 'ucs2/ucs-2/utf16le/utf-16le'
+    | 'utf-8/utf8'
+    | 'latin1';
     /** 接口调用失败的回调函数 */
     fail?: AppendFileFailCallback;
     /** 接口调用成功的回调函数 */
@@ -925,7 +925,7 @@ backgroundAudioManager.src = 'http://ws.stream.qqmusic.qq.com/M500001VfvsJ21xFqb
    * | WhiteSmoke           | #F5F5F5 |
    * | Yellow               | #FFFF00 |
    * | YellowGreen          | #9ACD32 | */
-  interface Color {}
+  interface Color { }
   interface CompressImageOption {
     /** 图片路径，图片的路径，可以是相对路径、临时文件路径、存储文件路径 */
     src: string;
@@ -1008,13 +1008,13 @@ backgroundAudioManager.src = 'http://ws.stream.qqmusic.qq.com/M500001VfvsJ21xFqb
      * - 'step-start': 动画第一帧就跳至结束状态直到结束;
      * - 'step-end': 动画一直保持开始状态，最后一帧跳到结束状态; */
     timingFunction?:
-      | 'linear'
-      | 'ease'
-      | 'ease-in'
-      | 'ease-in-out'
-      | 'ease-out'
-      | 'step-start'
-      | 'step-end';
+    | 'linear'
+    | 'ease'
+    | 'ease-in'
+    | 'ease-in-out'
+    | 'ease-out'
+    | 'step-start'
+    | 'step-end';
     transformOrigin?: string;
   }
   interface CreateBLEConnectionOption {
@@ -1120,24 +1120,38 @@ backgroundAudioManager.src = 'http://ws.stream.qqmusic.qq.com/M500001VfvsJ21xFqb
     /** 指定样式名列表，返回节点对应样式名的当前值
      *
      * 最低基础库： `2.1.0` */
-    computedStyle?: Array<string>;
+    computedStyle: Array<string>;
     /** 是否返回节点对应的 Context 对象
      *
      * 最低基础库： `2.4.2` */
-    context?: boolean;
+    context: boolean;
     /** 是否返回节点 dataset */
-    dataset?: boolean;
+    dataset: boolean;
     /** 是否返回节点 id */
-    id?: boolean;
+    id: boolean;
     /** 指定属性名列表，返回节点对应属性名的当前属性值（只能获得组件文档中标注的常规属性值，id class style 和事件绑定的属性值不可获取） */
-    properties?: Array<string>;
+    properties: Array<string>;
     /** 是否返回节点布局位置（`left` `right` `top` `bottom`） */
-    rect?: boolean;
+    rect: boolean;
     /** 否 是否返回节点的 `scrollLeft` `scrollTop`，节点必须是 `scroll-view` 或者 `viewport` */
-    scrollOffset?: boolean;
+    scrollOffset: boolean;
     /** 是否返回节点尺寸（`width` `height`） */
-    size?: boolean;
+    size: boolean;
   }
+  interface FieldsInfo {
+    context: object;
+    dataset: DataSet;
+    id: string
+    rect: Pick<BoundingClientRectCallbackResult, 'left' | 'right' | 'top' | 'bottom'>
+    size: Pick<BoundingClientRectCallbackResult, 'width' | 'height'>
+    scrollOffset: number
+  }
+  type ArrayValues<T> = T extends (infer P)[] ? P : never
+  type FieldsCommonKeys = Exclude<keyof Fields, 'computedStyle' | 'properties'>
+  type FieldsInfoResultCommon = { [K in FieldsCommonKeys]: FieldsInfo[K] }
+  type FieldsInfoComputedStyle = { [K in ArrayValues<Fields["computedStyle"]>]: string }
+  type FieldsInfoProperties = { [K in ArrayValues<Fields["properties"]>]: string }
+  type FieldsInfoResult<K extends keyof Fields> = Pick<FieldsInfoResultCommon, Exclude<K, 'computedStyle' | 'properties'>> & (K extends 'computedStyle' ? FieldsInfoComputedStyle : {}) & (K extends 'properties' ? FieldsInfoProperties : {})
   interface FileSystemManagerGetFileInfoOption {
     /** 要读取的文件路径 */
     filePath: string;
@@ -1465,14 +1479,14 @@ backgroundAudioManager.src = 'http://ws.stream.qqmusic.qq.com/M500001VfvsJ21xFqb
      *
      * 最低基础库： `1.9.90` */
     orientation:
-      | 'up'
-      | 'up-mirrored'
-      | 'down'
-      | 'down-mirrored'
-      | 'left-mirrored'
-      | 'right'
-      | 'right-mirrored'
-      | 'left';
+    | 'up'
+    | 'up-mirrored'
+    | 'down'
+    | 'down-mirrored'
+    | 'left-mirrored'
+    | 'right'
+    | 'right-mirrored'
+    | 'left';
     /** 图片的本地路径 */
     path: string;
     /** 图片格式
@@ -2648,13 +2662,13 @@ innerAudioContext.onError((res) => {
      * - 'utf-8/utf8': ;
      * - 'latin1': ; */
     encoding?:
-      | 'ascii'
-      | 'base64'
-      | 'binary'
-      | 'hex'
-      | 'ucs2/ucs-2/utf16le/utf-16le'
-      | 'utf-8/utf8'
-      | 'latin1';
+    | 'ascii'
+    | 'base64'
+    | 'binary'
+    | 'hex'
+    | 'ucs2/ucs-2/utf16le/utf-16le'
+    | 'utf-8/utf8'
+    | 'latin1';
     /** 接口调用失败的回调函数 */
     fail?: ReadFileFailCallback;
     /** 接口调用成功的回调函数 */
@@ -2705,13 +2719,13 @@ innerAudioContext.onError((res) => {
      *
      * 最低基础库： `2.1.0` */
     audioSource?:
-      | 'auto'
-      | 'buildInMic'
-      | 'headsetMic'
-      | 'mic'
-      | 'camcorder'
-      | 'voice_communication'
-      | 'voice_recognition';
+    | 'auto'
+    | 'buildInMic'
+    | 'headsetMic'
+    | 'mic'
+    | 'camcorder'
+    | 'voice_communication'
+    | 'voice_recognition';
     /** 录音的时长，单位 ms，最大值 600000（10 分钟） */
     duration?: number;
     /** 编码码率，有效值见下表格 */
@@ -2743,15 +2757,15 @@ innerAudioContext.onError((res) => {
      * - 44100: 44100 采样率;
      * - 48000: 48000 采样率; */
     sampleRate?:
-      | 8000
-      | 11025
-      | 12000
-      | 16000
-      | 22050
-      | 24000
-      | 32000
-      | 44100
-      | 48000;
+    | 8000
+    | 11025
+    | 12000
+    | 16000
+    | 22050
+    | 24000
+    | 32000
+    | 44100
+    | 48000;
   }
   /** 菜单按钮的布局位置信息 */
   interface Rect {
@@ -2903,14 +2917,14 @@ innerAudioContext.onError((res) => {
      * - 'TRACE': HTTP 请求 TRACE;
      * - 'CONNECT': HTTP 请求 CONNECT; */
     method?:
-      | 'OPTIONS'
-      | 'GET'
-      | 'HEAD'
-      | 'POST'
-      | 'PUT'
-      | 'DELETE'
-      | 'TRACE'
-      | 'CONNECT';
+    | 'OPTIONS'
+    | 'GET'
+    | 'HEAD'
+    | 'POST'
+    | 'PUT'
+    | 'DELETE'
+    | 'TRACE'
+    | 'CONNECT';
     /** 响应的数据类型
      *
      * 可选值：
@@ -3092,25 +3106,25 @@ innerAudioContext.onError((res) => {
      * - 'WX_CODE': 二维码;
      * - 'CODE_25': 一维码; */
     scanType:
-      | 'QR_CODE'
-      | 'AZTEC'
-      | 'CODABAR'
-      | 'CODE_39'
-      | 'CODE_93'
-      | 'CODE_128'
-      | 'DATA_MATRIX'
-      | 'EAN_8'
-      | 'EAN_13'
-      | 'ITF'
-      | 'MAXICODE'
-      | 'PDF_417'
-      | 'RSS_14'
-      | 'RSS_EXPANDED'
-      | 'UPC_A'
-      | 'UPC_E'
-      | 'UPC_EAN_EXTENSION'
-      | 'WX_CODE'
-      | 'CODE_25';
+    | 'QR_CODE'
+    | 'AZTEC'
+    | 'CODABAR'
+    | 'CODE_39'
+    | 'CODE_93'
+    | 'CODE_128'
+    | 'DATA_MATRIX'
+    | 'EAN_8'
+    | 'EAN_13'
+    | 'ITF'
+    | 'MAXICODE'
+    | 'PDF_417'
+    | 'RSS_14'
+    | 'RSS_EXPANDED'
+    | 'UPC_A'
+    | 'UPC_E'
+    | 'UPC_EAN_EXTENSION'
+    | 'WX_CODE'
+    | 'CODE_25';
   }
   interface ScrollOffsetCallbackResult {
     /** 节点的 dataset */
@@ -3716,13 +3730,13 @@ innerAudioContext.onError((res) => {
      * - 'step-start': 动画第一帧就跳至结束状态直到结束;
      * - 'step-end': 动画一直保持开始状态，最后一帧跳到结束状态; */
     timingFunction?:
-      | 'linear'
-      | 'ease'
-      | 'ease-in'
-      | 'ease-in-out'
-      | 'ease-out'
-      | 'step-start'
-      | 'step-end';
+    | 'linear'
+    | 'ease'
+    | 'ease-in'
+    | 'ease-in-out'
+    | 'ease-out'
+    | 'step-start'
+    | 'step-end';
     transformOrigin?: string;
   }
   interface StopAccelerometerOption {
@@ -4150,13 +4164,13 @@ innerAudioContext.onError((res) => {
      * - 'utf-8/utf8': ;
      * - 'latin1': ; */
     encoding?:
-      | 'ascii'
-      | 'base64'
-      | 'binary'
-      | 'hex'
-      | 'ucs2/ucs-2/utf16le/utf-16le'
-      | 'utf-8/utf8'
-      | 'latin1';
+    | 'ascii'
+    | 'base64'
+    | 'binary'
+    | 'hex'
+    | 'ucs2/ucs-2/utf16le/utf-16le'
+    | 'utf-8/utf8'
+    | 'latin1';
     /** 接口调用失败的回调函数 */
     fail?: WriteFileFailCallback;
     /** 接口调用成功的回调函数 */
@@ -6737,7 +6751,7 @@ Page({
   }
 })
 ``` */
-    fields(fields: Fields): void;
+    fields<K extends keyof Fields>(fields: Pick<Fields, K>, callback?: (res: FieldsInfoResult<K>) => void): SelectorQuery;
     /** [[SelectorQuery](https://developers.weixin.qq.com/miniprogram/dev/api/wxml/SelectorQuery.html) NodesRef.boundingClientRect(function callback)](NodesRef.boundingClientRect.md)
 *
 * 添加节点的布局位置的查询请求。相对于显示区域，以像素为单位。其功能类似于 DOM 的 `getBoundingClientRect`。返回 `NodesRef` 对应的 `SelectorQuery`。

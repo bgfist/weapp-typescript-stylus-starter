@@ -175,7 +175,7 @@ declare namespace Page {
 
   interface PageConstructor {
     <D extends IAnyObject = any, E extends IAnyObject = any>(
-      options: WXPageConstructorOptions<D> & E
+      options: Optional<WXPageConstructorOptions<D>> & E
     ): void
   }
 

@@ -1,0 +1,8 @@
+<view>
+  <button class="btn" type="primary" bindtap="incrCount">加一</button>
+  <button class="btn" type="primary" bindtap="decrCount">减一</button>
+  <view id="the-id" data-count="{{testNum}}">inner: {{count}}</view>
+  <view bind:tap="tapAddTest">redux: {{testNum}}</view>
+  <view>下面是组件的</view>
+  <hook start="{{count}}"/>
+</view>

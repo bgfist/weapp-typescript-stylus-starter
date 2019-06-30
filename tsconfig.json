@@ -6,8 +6,9 @@
     "typeRoots": ["./typings"],
     "moduleResolution": "node",
     "noLib": true,
-    "inlineSourceMap": true,
-    "inlineSources": true,
+    // "inlineSourceMap": true,
+    // "inlineSources": true,
+    "removeComments": true,
     "plugins": [
       {
         "name": "typescript-tslint-plugin"

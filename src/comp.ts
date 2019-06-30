@@ -1,11 +1,11 @@
-import { collectClassProps, splitFieldsAndMethods, identity } from "./utils/lang"
+import { collectClassProps, splitFieldsAndMethods, identity, transformProperties } from "./utils/lang"
 
 interface WXComponent<P extends AnyObject = never, D extends AnyObject = never, A extends AnyObject = never> extends Component.WXComponent<P, D> {
   actions: A
 }
 
 class WXComponent<P extends AnyObject = never, D extends AnyObject = never, A extends AnyObject = never> {
-  public init(connect = identity) {
+  public init(connect: AnyFunction = identity) {
     let props: WXComponent<P, D> = collectClassProps(this, "init")
 
     const {
@@ -61,7 +61,7 @@ class WXComponent<P extends AnyObject = never, D extends AnyObject = never, A ex
 interface WXComponentBehavior<P extends AnyObject = any, D extends AnyObject = any> extends Component.WXComponentBehavior<P, D> {}
 
 class WXComponentBehavior<P extends AnyObject = any, D extends AnyObject = any> {
-  public init(connect = identity) {
+  public init(connect: AnyFunction = identity) {
     let props: WXComponentBehavior<P, D> = collectClassProps(this, "init")
 
     const { constructor, init, behaviors, properties, data, created, attached, ready, moved, detached, error, ...others } = props
@@ -143,50 +143,6 @@ function checkForbiddenProps(props: any) {
   }
 
   return others
-}
-
-function transformProperties(properties: any) {
-  if (!properties) {
-    return
-  }
-
-  return Object.keys(properties).reduce((obj: any, key) => {
-    const value = properties[key]
-
-    let type: any
-    switch (typeof value) {
-      case "undefined":
-      case "symbol":
-      case "bigint":
-        throw new Error(`WXComponent: 不支持的属性类型，key=${key}, type=${typeof value}`)
-      case "boolean":
-        type = Boolean
-        break
-      case "number":
-        type = Number
-        break
-      case "string":
-        type = String
-        break
-      case "function":
-        type = null
-        break
-      case "object":
-        if (value instanceof Array) {
-          type = Array
-        } else {
-          type = Object
-        }
-        break
-    }
-
-    obj[key] = {
-      type,
-      value
-    }
-
-    return obj
-  }, {})
 }
 
 function injectActions(props: any) {

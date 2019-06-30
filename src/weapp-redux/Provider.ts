@@ -1,7 +1,7 @@
-import { Store } from "redux"
+import { Store, AppConfig } from "./types"
 
-export default function Provider(store: Store<any, any>) {
-  return <D>(appConfig: App.AppInstance<D> & D) => {
-    return { ...appConfig, store }
+export default function Provider(store: Store) {
+  return <D, E>(config: App.AppInstance<D> & E): AppConfig<D, E> => {
+    return { ...config, store }
   }
 }

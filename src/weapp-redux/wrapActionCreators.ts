@@ -1,16 +1,12 @@
-import { ActionCreator, AnyAction, Dispatch } from "redux"
+import { ActionCreator, Dispatch, ActionCreators } from "./types"
 
-interface ActionCreators {
-  [k: string]: ActionCreator<AnyAction>
-}
-
-function bindActionCreator(actionCreator: ActionCreator<AnyAction>, dispatch: Dispatch) {
+export function bindActionCreator<T extends ActionCreator>(actionCreator: T, dispatch: Dispatch) {
   return function creator(...args: any[]) {
-    return dispatch(actionCreator.apply(undefined, args))
+    return dispatch(actionCreator.apply(undefined, args) as ReturnType<T>)
   }
 }
 
-function bindActionCreators(actionCreators: ActionCreators, dispatch: Dispatch) {
+export function bindActionCreators(actionCreators: ActionCreators, dispatch: Dispatch) {
   if (typeof actionCreators === "function") {
     return bindActionCreator(actionCreators, dispatch)
   }

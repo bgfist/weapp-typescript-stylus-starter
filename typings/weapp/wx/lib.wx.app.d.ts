@@ -227,8 +227,8 @@ declare namespace App {
   }
 
   interface AppConstructor {
-    <T extends IAnyObject>(
-      options: AppInstance<T> & T
+    <T extends IAnyObject, E extends AnyObject = any>(
+      options: AppInstance<T> & E
     ): void
   }
 

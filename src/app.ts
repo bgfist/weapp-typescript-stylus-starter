@@ -12,8 +12,10 @@ interface App {
   globalInfo: number
 }
 
-App<App>(
-  Provider(store)({
+const makeContext = Provider(store)
+
+App(
+  makeContext<any, App>({
     globalInfo: 1,
     onError(error) {
       console.error(`App Error: ${error}, globalInfo: ${this.globalInfo}`)

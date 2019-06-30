@@ -5,7 +5,7 @@ interface WXPage<D extends AnyObject = never, A extends AnyObject = never> exten
 }
 
 class WXPage<D extends AnyObject = never, A extends AnyObject = never> {
-  public init(connect = identity) {
+  public init(connect: AnyFunction = identity) {
     let props = collectClassProps(this, "init")
 
     props = checkActionsProp(props)

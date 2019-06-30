@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "weapp-typescript-stylus-starter",
+  "usingComponents": {
+    "hook": "../../comps/hook/hook"
+  }
+}

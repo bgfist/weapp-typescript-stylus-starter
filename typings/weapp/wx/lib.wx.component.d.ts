@@ -144,7 +144,7 @@ declare namespace Component {
     dataset: { [k: string]: string }
 
     setData<K extends keyof D>(
-      data: Pick<D, K> & { [keyPath: string]: any },
+      data: Pick<D, K> | { [keyPath: string]: any },
       callback?: () => void
     ): void
 
@@ -204,13 +204,13 @@ declare namespace Component {
 
   interface WXComponentConstructor {
     <P extends IAnyObject = any, D extends AnyObject = any, E extends AnyObject = any>(
-      options: WXComponentConstructorOptions<P, D> & E
+      options: Optional<WXComponentConstructorOptions<P, D>> & E
     ): void
   }
 
   interface WXComponentBehaviorConstructor {
     <P extends IAnyObject = any, D extends AnyObject = any, E extends AnyObject = any>(
-      options: WXComponentBehaviorConstructOptions<P, D> & E
+      options: Optional<WXComponentBehaviorConstructOptions<P, D>> & E
     ): WXComponentBehavior
   }
 
