@@ -1,5 +1,5 @@
-import { FComp, useState, useEffect, useLayoutEffect, useThisAsComp } from "../../hooks"
-import { useSelector, useActionCreator } from "../../weapp-redux/index"
+import { FComp, useState, useEffect, useLayoutEffect, useThisAsComp } from "@bgfist/weact"
+import { useSelector, useActionCreator } from "@bgfist/weact-redux"
 import { AppState, addTest } from "../../store/index"
 
 interface Properties {

@@ -1,5 +1,5 @@
-import { FPage, useState, useEffect, useLayoutEffect } from "../../hooks"
-import { useSelector, useActionCreator } from "../../weapp-redux/index"
+import { FPage, useState, useEffect, useLayoutEffect } from "@bgfist/weact"
+import { useSelector, useActionCreator } from "@bgfist/weact-redux"
 import { AppState, addTest } from "../../store/index"
 
 function queryDataSet() {

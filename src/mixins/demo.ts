@@ -1,6 +1,6 @@
-import { WXComponentBehavior } from "../comp"
+import { WXComponentBehavior } from "@bgfist/weact"
 import { AppState } from "../store/index"
-import { connect } from "../weapp-redux/index"
+import { connect } from "@bgfist/weact-redux"
 
 interface Properties {
   mixinName: string

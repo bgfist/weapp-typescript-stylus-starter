@@ -24,7 +24,7 @@ const genCompJsonContent = () => `{
 
 // -----
 
-const genPageTsContent = (filename, importPagePath) => `import WXPage from "${importPagePath}"
+const genPageTsContent = filename => `import WXPage from "@bgfist/weact"
 
 interface Data {}
 
@@ -37,7 +37,7 @@ new ${transformHyphenToCamelCase(filename)}Page().init()
 
 // -----
 
-const genCompTsContent = (filename, importPagePath) => `import { WXComponent } from "${importPagePath}"
+const genCompTsContent = filename => `import { WXComponent } from "@bgfist/weact"
 
 interface Properties {}
 
@@ -78,10 +78,9 @@ const addPathToAppJson = params => {
 const createPage = (parentPath, name) => {
   const destPath = parentPath ? `${parentPath}/${name}` : `${name}`
   const pageDirPath = path.resolve(pagesPath, destPath)
-  const importPagePath = path.relative(pageDirPath, path.resolve(srcPath, "page"))
   fs.mkdirSync(pageDirPath, { recursive: true })
   fs.writeFileSync(path.resolve(pageDirPath, name + ".json"), genPageJsonContent())
-  fs.writeFileSync(path.resolve(pageDirPath, name + ".ts"), genPageTsContent(name, importPagePath))
+  fs.writeFileSync(path.resolve(pageDirPath, name + ".ts"), genPageTsContent(name))
   fs.writeFileSync(path.resolve(pageDirPath, name + ".wxml"), genWXMLContent())
   fs.writeFileSync(path.resolve(pageDirPath, name + ".styl"), genStylusContent())
 
@@ -91,10 +90,9 @@ const createPage = (parentPath, name) => {
 const createComponent = (parentPath, name) => {
   const destPath = parentPath ? `${parentPath}/${name}` : `${name}`
   const compDirPath = path.resolve(compsPath, destPath)
-  const importCompPath = path.relative(compDirPath, path.resolve(srcPath, "comp"))
   fs.mkdirSync(compDirPath, { recursive: true })
   fs.writeFileSync(path.resolve(compDirPath, name + ".json"), genCompJsonContent())
-  fs.writeFileSync(path.resolve(compDirPath, name + ".ts"), genCompTsContent(name, importCompPath))
+  fs.writeFileSync(path.resolve(compDirPath, name + ".ts"), genCompTsContent(name))
   fs.writeFileSync(path.resolve(compDirPath, name + ".wxml"), genWXMLContent())
   fs.writeFileSync(path.resolve(compDirPath, name + ".styl"), genStylusContent())
 }

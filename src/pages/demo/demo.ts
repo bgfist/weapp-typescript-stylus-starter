@@ -1,8 +1,8 @@
-import WXPage from "../../page"
+import { WXPage } from "@bgfist/weact"
 import { pageUrl } from "../../utils/route"
 import { Material } from "../../types"
 
-import { connect } from "../../weapp-redux/index"
+import { connect } from "@bgfist/weact-redux"
 import { AppState, addTest, doubleTest } from "../../store/index"
 
 interface Data {

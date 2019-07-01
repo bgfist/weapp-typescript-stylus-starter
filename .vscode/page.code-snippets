@@ -3,7 +3,7 @@
 		"scope": "typescript",
 		"prefix": "page",
 		"body": [
-			"import WXPage from \"../../page\"",
+			"import { WXPage } from \"@bgfist/weact\"",
 			"",
 			"interface Data {}",
 			"",
@@ -20,7 +20,7 @@
 		"scope": "typescript",
 		"prefix": "comp",
 		"body": [
-			"import { WXComponent } from \"../../comp\"",
+			"import { WXComponent } from \"@bgfist/weact\"",
 			"",
 			"interface Properties {}",
 			"",
@@ -41,7 +41,7 @@
 		"scope": "typescript",
 		"prefix": "mixin",
 		"body": [
-			"import { WXComponentBehavior } from \"../comp\"",
+			"import { WXComponentBehavior } from \"@bgfist/weact\"",
 			"",
 			"interface Properties {}",
 			"",

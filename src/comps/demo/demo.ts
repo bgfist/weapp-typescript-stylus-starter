@@ -1,8 +1,8 @@
-import { WXComponent } from "../../comp"
+import { WXComponent } from "@bgfist/weact"
 import DemoMixin from "../../mixins/demo"
 
 import { doubleTest } from "../../store/actions/index"
-import { connect } from "../../weapp-redux/index"
+import { connect } from "@bgfist/weact-redux"
 
 interface Properties {
   name: string

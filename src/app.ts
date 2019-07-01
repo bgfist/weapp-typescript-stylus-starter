@@ -1,5 +1,7 @@
+/// <reference types="@bgfist/weact"/>
+
 import store from "./store/index"
-import { Provider } from "./weapp-redux/index"
+import { Provider } from "@bgfist/weact-redux"
 import { debug } from "./utils/log"
 
 const debugRedux = debug("redux")
