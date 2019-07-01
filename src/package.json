@@ -10,8 +10,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@bgfist/weact": "1.0.3",
-    "@bgfist/weact-redux": "1.0.0",
-    "redux": "4.0.1"
+    "@bgfist/weact": "^1.0.4",
+    "@bgfist/weact-redux": "^1.0.0",
+    "redux": "^4.0.1"
   }
 }

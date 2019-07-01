@@ -4,6 +4,7 @@ import { AppState, addTest } from "../../store/index"
 
 interface Properties {
   start: number
+  end: number
 }
 
 function useQueryDataSet() {
@@ -43,10 +44,12 @@ function useQueryDataSet() {
 }
 
 function Demo(prop: Properties) {
-  const { start } = prop
+  const { start, end } = prop
 
   const [count, setCount] = useState(1)
-  const [name] = useState("jack")
+  const [userInfo, setUserInfo] = useState({
+    name: "jack"
+  })
 
   useEffect(() => {
     const timer = setTimeout(() => console.log("timer trigger"), count * 1000)
@@ -67,14 +70,18 @@ function Demo(prop: Properties) {
 
   const tapAddTest = () => addTestAction(start)
 
+  const changeName = () => setUserInfo(u => ({ name: "weact" }))
+
   return {
     count,
-    name,
+    total: count + start + end,
+    userInfo,
     testNum,
     incrCount,
     decrCount,
-    tapAddTest
+    tapAddTest,
+    changeName
   }
 }
 
-FComp(Demo, { start: 4 })
+FComp(Demo, { start: 4, end: 5 })

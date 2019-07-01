@@ -1,4 +1,6 @@
 <view>
   <view id="the-id" bind:tap="incrCount">inner: {{count}}</view>
+  <view>total: {{total}}</view>
   <view bind:tap="tapAddTest">redux: {{testNum}}</view>
+  <view bind:tap="changeName">{{userInfo.name}}</view>
 </view>

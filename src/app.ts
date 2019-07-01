@@ -1,8 +1,9 @@
-/// <reference types="@bgfist/weact"/>
-
+import * as Weact from "@bgfist/weact"
 import store from "./store/index"
 import { Provider } from "@bgfist/weact-redux"
 import { debug } from "./utils/log"
+
+Weact.debugWeact()
 
 const debugRedux = debug("redux")
 
