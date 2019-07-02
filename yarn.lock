@@ -138,11 +138,6 @@
     lodash "^4.17.11"
     to-fast-properties "^2.0.0"
 
-"@bgfist/weact@^1.0.5":
-  version "1.0.5"
-  resolved "https://registry.yarnpkg.com/@bgfist/weact/-/weact-1.0.5.tgz#2a103ec24430b42b7f03d689b2df9c48938e88d5"
-  integrity sha512-Ce7Aq8pNdOC+Mw3z4KmfhSXdIFrbSfc3Uu5ZS8N2BKfvJd6dI7ivp1Llw0dXqcojtIOFZr1z1+7F4ozm6BIboQ==
-
 "@cnakazawa/watch@^1.0.3":
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/@cnakazawa/watch/-/watch-1.0.3.tgz#099139eaec7ebf07a27c1786a3ff64f39464d2ef"

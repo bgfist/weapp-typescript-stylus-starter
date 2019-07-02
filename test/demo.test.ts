@@ -1,4 +1,4 @@
-import { createHookRunner, diffHookReturnData } from "@bgfist/weact"
+import { createHookRunner, diffHookReturnData } from "../src/node_modules/@bgfist/weact"
 import { Demo } from "../src/comps/hook/hook"
 
 describe("Demo", () => {
