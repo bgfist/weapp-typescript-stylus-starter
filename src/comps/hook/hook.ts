@@ -2,7 +2,7 @@ import { FComp, useState, useEffect, useLayoutEffect, useThisAsComp } from "@bgf
 import { useSelector, useActionCreator } from "@bgfist/weact-redux"
 import { AppState, addTest } from "../../store/index"
 
-interface Properties {
+export interface Properties {
   start: number
   end: number
 }
@@ -43,7 +43,7 @@ function useQueryDataSet() {
   }
 }
 
-function Demo(prop: Properties) {
+export function Demo(prop: Properties) {
   const { start, end } = prop
 
   const [count, setCount] = useState(1)

@@ -9,7 +9,6 @@ interface Properties {
 }
 
 interface Data {
-  name: string
   age: number
 }
 
@@ -25,7 +24,6 @@ class DemoComp extends WXComponent<Properties, Data, typeof mapDispatchToActions
   }
 
   public data: Data = {
-    name: "ok",
     age: 0
   }
 

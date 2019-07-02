@@ -3,7 +3,7 @@ import store from "./store/index"
 import { Provider } from "@bgfist/weact-redux"
 import { debug } from "./utils/log"
 
-Weact.debugWeact()
+Weact.debugWeact(true)
 
 const debugRedux = debug("redux")
 
