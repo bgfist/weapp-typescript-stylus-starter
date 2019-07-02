@@ -2,6 +2,7 @@
   "name": "weapp-typescript-stylus-starter",
   "version": "1.0.1",
   "scripts": {
+    "bootstrap": "yarn && npm run build:npm",
     "start": "npm run build:ts:watch & npm run build:styl:watch && fg",
     "build": "npm run clean && npm run build:ts && npm run build:styl",
     "build:ts": "tsc",

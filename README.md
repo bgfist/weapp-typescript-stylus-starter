@@ -3,7 +3,7 @@
 ## Getting Started
 
 ```bash
-npm i
+npm run bootstrap
 ```
 
 然后打开 node_modules/bin/stylus 文件，搜索 `.css`，将第二处匹配改为 `.wxss`，如下
