@@ -11,7 +11,7 @@
     "build:styl:watch": "npm run build:styl -- -w",
     "build:npm": "cd src && yarn && rm -rf miniprogram_npm && cd .. && /Applications/wechatwebdevtools.app/Contents/MacOS/cli --build-npm `pwd` && gulp fixnpm",
     "test": "jest",
-    "clean": "rm -f `find src -name '*.js' -or -name '*.wxss' -or -name '*.js.map'`"
+    "clean": "rm -f `find src \\( -path 'src/node_modules' -o -path 'src/miniprogram_npm' \\) -prune -o \\( -name '*.js' -o -name '*.wxss' -o -name '*.js.map' \\) -print`"
   },
   "devDependencies": {
     "@types/jest": "^24.0.15",

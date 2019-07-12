@@ -2,18 +2,18 @@
 # yarn lockfile v1
 
 
-"@bgfist/weact-redux@^1.0.0":
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/@bgfist/weact-redux/-/weact-redux-1.0.0.tgz#0de19ebe7880465a9041b82841d84b409f86723d"
-  integrity sha512-Y0s0ocK9ve2r3ygCD6ASwx3IE4OViN5kIlo98fuw43jSnhOF8RL0HmEuMZru7RgC8KHzwCRGuHD23h3qTWmOkg==
+"@bgfist/weact-redux@^1.0.1":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@bgfist/weact-redux/-/weact-redux-1.0.1.tgz#6ad89fc797835f3fac4fa951758e46d0d574a2ca"
+  integrity sha512-czQA7N6JV4gE5Ow1DzLgveohNJyVNEzU25QoBeUctCHfxP4xKC0LVMDEJZURHP1rlAdDq45PFeJqtrGveEeFYQ==
   dependencies:
-    "@bgfist/weact" "^1.0.3"
+    "@bgfist/weact" "^1.0.8"
     redux "^4.0.1"
 
-"@bgfist/weact@^1.0.3", "@bgfist/weact@^1.0.5":
-  version "1.0.5"
-  resolved "https://registry.yarnpkg.com/@bgfist/weact/-/weact-1.0.5.tgz#2a103ec24430b42b7f03d689b2df9c48938e88d5"
-  integrity sha512-Ce7Aq8pNdOC+Mw3z4KmfhSXdIFrbSfc3Uu5ZS8N2BKfvJd6dI7ivp1Llw0dXqcojtIOFZr1z1+7F4ozm6BIboQ==
+"@bgfist/weact@^1.0.12", "@bgfist/weact@^1.0.8":
+  version "1.0.12"
+  resolved "https://registry.yarnpkg.com/@bgfist/weact/-/weact-1.0.12.tgz#ebc939b01437e2985b6ec6999b4d3e99c654d798"
+  integrity sha512-ZDis4Yl7PrfVYo8QcIQP11HMivOjBsZ2OlX9I+3eSsYoFJWdh+8xXzn5JRMhhOSEFVUyPEw793nEds+zD1prcA==
 
 "js-tokens@^3.0.0 || ^4.0.0":
   version "4.0.0"
@@ -28,9 +28,9 @@ loose-envify@^1.4.0:
     js-tokens "^3.0.0 || ^4.0.0"
 
 redux@^4.0.1:
-  version "4.0.1"
-  resolved "https://registry.yarnpkg.com/redux/-/redux-4.0.1.tgz#436cae6cc40fbe4727689d7c8fae44808f1bfef5"
-  integrity sha512-R7bAtSkk7nY6O/OYMVR9RiBI+XghjF9rlbl5806HJbQph0LJVHZrU5oaO4q70eUKiqMRqm4y07KLTlMZ2BlVmg==
+  version "4.0.4"
+  resolved "https://registry.yarnpkg.com/redux/-/redux-4.0.4.tgz#4ee1aeb164b63d6a1bcc57ae4aa0b6e6fa7a3796"
+  integrity sha512-vKv4WdiJxOWKxK0yRoaK3Y4pxxB0ilzVx6dszU2W8wLxlb2yikRph4iV/ymtdJ6ZxpBLFbyrxklnT5yBbQSl3Q==
   dependencies:
     loose-envify "^1.4.0"
     symbol-observable "^1.2.0"
