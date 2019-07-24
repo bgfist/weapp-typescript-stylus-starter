@@ -17,15 +17,11 @@ export function createActionCreator<P>(type: string): ActionCreator<P> {
 export function createReducer<S>(initialState: S) {
   const handlers: { [type: string]: Handler<any, S> } = {}
 
-  const reducer = (state: S | undefined, action: Action<any>) => {
-    if (!state) {
-      return initialState
-    }
-
+  const reducer = (state: S = initialState, action: Action<any>) => {
     const { type, payload } = action
     const handler = handlers[type]
     if (!handler) {
-      return initialState
+      return state
     }
 
     return handler(payload, state)
