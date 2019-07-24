@@ -1,7 +1,5 @@
 import { WXPage } from "@bgfist/weact"
 import { pageUrl } from "../../utils/route"
-import { Material } from "../../types"
-
 import { connect } from "@bgfist/weact-redux"
 import { AppState, addTest, doubleTest } from "../../store/index"
 
@@ -10,7 +8,7 @@ interface Data {
     name: string
     age: number
   }
-  materials: Material[]
+  materials: Array<{ id: number; title: string }>
 }
 
 const mapStateToData = (state: AppState) => ({

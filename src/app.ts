@@ -1,3 +1,4 @@
+import "./core/polyfills"
 import * as Weact from "@bgfist/weact"
 import store from "./store/index"
 import { Provider } from "@bgfist/weact-redux"

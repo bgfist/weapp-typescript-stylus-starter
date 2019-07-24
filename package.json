@@ -1,14 +1,15 @@
 {
   "name": "weapp-typescript-stylus-starter",
   "version": "1.0.1",
+  "license": "MIT",
   "scripts": {
-    "bootstrap": "yarn && npm run build:npm",
-    "start": "npm run build:ts:watch & npm run build:styl:watch && fg",
-    "build": "npm run clean && npm run build:ts && npm run build:styl",
+    "bootstrap": "yarn && yarn build:npm",
+    "start": "yarn build:ts:watch & yarn build:styl:watch && fg",
+    "build": "yarn clean && yarn build:ts && yarn build:styl",
     "build:ts": "tsc",
-    "build:ts:watch": "npm run build:ts -- -w",
+    "build:ts:watch": "yarn build:ts -- -w",
     "build:styl": "stylus `find src -name '*.styl'`",
-    "build:styl:watch": "npm run build:styl -- -w",
+    "build:styl:watch": "yarn build:styl -- -w",
     "build:npm": "cd src && yarn && rm -rf miniprogram_npm && cd .. && /Applications/wechatwebdevtools.app/Contents/MacOS/cli --build-npm `pwd` && gulp fixnpm",
     "test": "jest",
     "clean": "rm -f `find src \\( -path 'src/node_modules' -o -path 'src/miniprogram_npm' \\) -prune -o \\( -name '*.js' -o -name '*.wxss' -o -name '*.js.map' \\) -print`"
@@ -25,6 +26,7 @@
     "minimist": "^1.2.0",
     "prettier": "^1.18.2",
     "stylus": "^0.54.5",
+    "stylus-supremacy": "^2.12.7",
     "ts-jest": "^24.0.2",
     "tslint": "^5.18.0",
     "tslint-config-prettier": "^1.18.0",
@@ -35,12 +37,16 @@
     "typescript-tslint-plugin": "^0.5.2"
   },
   "lint-staged": {
-    "*.{ts}": [
+    "*.ts": [
       "tslint --fix",
       "git add"
     ],
     "*.{json,js,md}": [
       "prettier --write",
+      "git add"
+    ],
+    "*.styl": [
+      "stylus-supremacy format --options ./.vscode/settings.json --replace",
       "git add"
     ]
   },

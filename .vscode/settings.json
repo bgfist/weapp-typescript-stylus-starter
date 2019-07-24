@@ -3,5 +3,7 @@
     "src/**/{*.js,*.js.map,*.wxss}": true,
     "src/{node_modules,miniprogram_npm}": true
   },
-  "typescript.tsdk": "node_modules/typescript/lib"
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "stylusSupremacy.tabStopChar": "  ",
+  "stylusSupremacy.alwaysUseExtends": true
 }

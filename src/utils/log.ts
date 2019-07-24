@@ -1,10 +1,9 @@
-const createLogger = (color: string, method: "log" | "info" | "warn" | "error") => (namespace: string) => (...args: any[]) =>
-  console[method]("%c" + namespace, `color: ${color}`, ...args)
+const createLogger = (color: string) => (namespace: string) => (...args: any[]) => console.log(`%c[${namespace}]`, `color: ${color}`, ...args)
 
-export const debug = createLogger("blue", "log")
+export const debug = createLogger("blue")
 
-export const info = createLogger("green", "info")
+export const info = createLogger("green")
 
-export const warn = createLogger("yellow", "warn")
+export const warn = createLogger("yellow")
 
-export const error = createLogger("red", "error")
+export const error = createLogger("red")

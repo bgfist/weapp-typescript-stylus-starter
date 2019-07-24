@@ -9,7 +9,7 @@
  *  7. 授权成功。
  */
 
-import { promisify } from "./promisify"
+import { wxp } from "@bgfist/weact"
 
 const authMap = {
   userInfo: "用户信息",
@@ -22,31 +22,34 @@ const authMap = {
   camera: "摄像头"
 }
 
-const repeatForceAuth = (scope: keyof typeof authMap): Promise<any> =>
-  promisify("showModal", {
-    title: "提示",
-    content: `小程序需要使用您的${authMap[scope]}，请前往授权`,
-    showCancel: false
-  })
-    .then(() => promisify("openSetting"))
-    .then((res: any) => {
-      if (!res.authSetting[`scope.${scope}`]) {
+const repeatForceAuth = (scope: keyof typeof authMap): Promise<void> =>
+  wxp
+    .showModal({
+      title: "提示",
+      content: `小程序需要使用您的${authMap[scope]}，请前往授权`,
+      showCancel: false
+    })
+    .then(() => wxp.openSetting())
+    .then(res => {
+      const scopeStr = `scope.${scope}` as keyof wx.AuthSetting
+      if (!res.authSetting[scopeStr]) {
         return repeatForceAuth(scope)
       }
       return
     })
 
-const makeAuthReq = (scope: keyof typeof authMap) => promisify("authorize", { scope: `scope.${scope}` }).catch(() => repeatForceAuth(scope))
+const makeAuthReq = (scope: keyof typeof authMap) => wxp.authorize({ scope: `scope.${scope}` }).catch(() => repeatForceAuth(scope))
 
 let currentAuthRequest: Promise<any>
 
 const authorize = (scope: keyof typeof authMap) =>
-  promisify("getSetting")
+  wxp
+    .getSetting()
     .catch(() => {
       throw new Error(`getSetting获取${scope}授权设置失败`)
     })
-    .then((res: any) => {
-      const authScope = `scope.${scope}`
+    .then(res => {
+      const authScope = `scope.${scope}` as keyof wx.AuthSetting
       if (!res.authSetting[authScope]) {
         if (!currentAuthRequest) {
           // 查看当前是否正在授权，等待之前的授权进行完
