@@ -1,7 +1,7 @@
 import { wxp } from "@bgfist/weact"
 import config from "../core/config"
 import { error } from "./log"
-import { redirectTo } from "./route"
+import { redirectTo, reLaunch } from "./route"
 
 const apiError = error("API ERROR")
 
@@ -87,7 +87,7 @@ const handleApiResponse = (res: any) => {
 
 const handleTokenInvalid = () => {
   tokenManager.removeToken()
-  redirectTo("login")
+  reLaunch("login")
   throw new Error("token失效")
 }
 
