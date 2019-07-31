@@ -1,6 +1,9 @@
-import { FPage, useState, useEffect, useLayoutEffect } from "@bgfist/weact"
+import { FPage, useState, useEffect, useLayoutEffect, useOnce } from "@bgfist/weact"
 import { useSelector, useActionCreator } from "@bgfist/weact-redux"
 import { AppState, addTest } from "../../store/index"
+import { getWeatherList, ApiResponse } from "../../core/api"
+
+type Weather = ApiResponse<typeof getWeatherList>[0]
 
 function queryDataSet() {
   wx.createSelectorQuery()
@@ -39,13 +42,20 @@ function Demo() {
 
   const tapAddTest = () => addTestAction(3)
 
+  const [weatherList, updateWeatherList] = useState<Weather[]>([])
+  useOnce(async () => {
+    const weatherList = await getWeatherList()
+    updateWeatherList(weatherList)
+  })
+
   return {
     count,
     name,
     testNum,
     incrCount,
     decrCount,
-    tapAddTest
+    tapAddTest,
+    weatherList
   }
 }
 

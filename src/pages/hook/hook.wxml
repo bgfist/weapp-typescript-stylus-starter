@@ -4,5 +4,10 @@
   <view id="the-id" data-count="{{testNum}}">inner: {{count}}</view>
   <view bind:tap="tapAddTest">redux: {{testNum}}</view>
   <view>下面是组件的</view>
-  <hook start="{{count}}" end="{{count+1}}"/>
+  <hook start="{{count}}" end="{{count+1}}" />
+  <view>天气列表</view>
+  <view wx:for="{{weatherList}}">
+    <text>{{item.day}}</text>
+    <text>{{item.wea}}</text>
+  </view>
 </view>

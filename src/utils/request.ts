@@ -1,7 +1,7 @@
 import { wxp } from "@bgfist/weact"
 import config from "../core/config"
 import { error } from "./log"
-import { redirectTo, reLaunch } from "./route"
+import { reLaunch } from "./route"
 
 const apiError = error("API ERROR")
 

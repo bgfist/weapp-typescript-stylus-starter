@@ -17,12 +17,13 @@
   "libVersion": "2.7.0",
   "projectname": "weapp-typescript-stylus-starter",
   "setting": {
-    "urlCheck": true,
+    "urlCheck": false,
     "es6": false,
     "postcss": true,
     "minified": true,
     "newFeature": true,
     "coverView": true,
+    "nodeModules": true,
     "autoAudits": false,
     "checkInvalidKey": true,
     "checkSiteMap": true,
@@ -31,8 +32,7 @@
       "ignore": [],
       "disablePlugins": [],
       "outputPath": ""
-    },
-    "nodeModules": true
+    }
   },
   "appid": "wxc9eaa68e42c65bf0",
   "simulatorType": "wechat",

@@ -10,10 +10,10 @@
     "@bgfist/weact" "^1.0.8"
     redux "^4.0.1"
 
-"@bgfist/weact@^1.0.13", "@bgfist/weact@^1.0.8":
-  version "1.0.13"
-  resolved "https://registry.yarnpkg.com/@bgfist/weact/-/weact-1.0.13.tgz#3887e7569915e14cc0224d80a8957c9718a13efd"
-  integrity sha512-lhz7A0OMyo7q5BeRZxRwznilfoKBmNxYr6/7HAjGgXeNq7kNyv5Wis6QAtPfws15BG0w/Aqust4ecxqKPRYVWg==
+"@bgfist/weact@^1.0.14", "@bgfist/weact@^1.0.8":
+  version "1.0.14"
+  resolved "https://registry.yarnpkg.com/@bgfist/weact/-/weact-1.0.14.tgz#cb07195c01da80639357470c2e70be89324d1360"
+  integrity sha512-67hR2z4Gj+SfonVopJpt/w4d8MCvTyXTX8PT6PUNbQ7tDUYiRsRey3pEyLRmUL/50Xmsiat0cIVxHjF1afCMwQ==
 
 "js-tokens@^3.0.0 || ^4.0.0":
   version "4.0.0"
