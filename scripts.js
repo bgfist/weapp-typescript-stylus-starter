@@ -24,7 +24,7 @@ const genCompJsonContent = () => `{
 
 // -----
 
-const genPageTsContent = filename => `import WXPage from "@bgfist/weact"
+const genPageTsContent = filename => `import { WXPage } from "@bgfist/weact"
 
 interface Data {}
 

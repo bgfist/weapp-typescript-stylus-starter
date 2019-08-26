@@ -1,5 +1,5 @@
 {
-  "pages": ["pages/hook/hook", "pages/demo/demo"],
+  "pages": ["pages/hook/hook", "pages/demo/demo", "pages/native/native"],
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",

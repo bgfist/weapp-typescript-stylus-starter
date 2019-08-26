@@ -2,18 +2,18 @@
 # yarn lockfile v1
 
 
-"@bgfist/weact-redux@^1.0.1":
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/@bgfist/weact-redux/-/weact-redux-1.0.1.tgz#6ad89fc797835f3fac4fa951758e46d0d574a2ca"
-  integrity sha512-czQA7N6JV4gE5Ow1DzLgveohNJyVNEzU25QoBeUctCHfxP4xKC0LVMDEJZURHP1rlAdDq45PFeJqtrGveEeFYQ==
+"@bgfist/weact-redux@^1.0.2":
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/@bgfist/weact-redux/-/weact-redux-1.0.2.tgz#ae6af627576a9c7fd674ebe16d9ada9aa14589ed"
+  integrity sha512-yqPB4qsVMYpbSJTJneOEpiNR5ObrK+JmYGAYCORRAZOM3fFDulte5oK89vyhWJvtyLQK2zO2b9qN1FIHPA3H0Q==
   dependencies:
-    "@bgfist/weact" "^1.0.8"
+    "@bgfist/weact" "^1.0.17"
     redux "^4.0.1"
 
-"@bgfist/weact@^1.0.14", "@bgfist/weact@^1.0.8":
-  version "1.0.14"
-  resolved "https://registry.yarnpkg.com/@bgfist/weact/-/weact-1.0.14.tgz#cb07195c01da80639357470c2e70be89324d1360"
-  integrity sha512-67hR2z4Gj+SfonVopJpt/w4d8MCvTyXTX8PT6PUNbQ7tDUYiRsRey3pEyLRmUL/50Xmsiat0cIVxHjF1afCMwQ==
+"@bgfist/weact@^1.0.17":
+  version "1.0.17"
+  resolved "https://registry.yarnpkg.com/@bgfist/weact/-/weact-1.0.17.tgz#beed85e35c678a4fece7f576500fb7da6770a1a1"
+  integrity sha512-5LyeSPnJuT45p4IH2s39b1niIwU1zz0E2+CZ5AmKc9b9BrIFnT7XtQM2zndPxl1mUjS2mfDKnmFz5OtQthL8Jw==
 
 "js-tokens@^3.0.0 || ^4.0.0":
   version "4.0.0"
