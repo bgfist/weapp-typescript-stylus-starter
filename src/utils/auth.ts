@@ -22,44 +22,36 @@ const authMap = {
   camera: "摄像头"
 }
 
-const repeatForceAuth = (scope: keyof typeof authMap): Promise<void> =>
-  wxp
-    .showModal({
-      title: "提示",
-      content: `小程序需要使用您的${authMap[scope]}，请前往授权`,
-      showCancel: false
-    })
-    .then(() => wxp.openSetting())
-    .then(res => {
-      const scopeStr = `scope.${scope}` as keyof wx.AuthSetting
-      if (!res.authSetting[scopeStr]) {
-        return repeatForceAuth(scope)
-      }
-      return
-    })
+type AuthScope = keyof typeof authMap
 
-const makeAuthReq = (scope: keyof typeof authMap) => wxp.authorize({ scope: `scope.${scope}` }).catch(() => repeatForceAuth(scope))
+async function goOpenSetting(scope: AuthScope) {
+  await wxp.showModal({
+    title: "提示",
+    content: `小程序需要使用您的${authMap[scope]}，请前往授权`,
+    showCancel: false
+  })
 
-let currentAuthRequest: Promise<any>
+  const settings = await wxp.openSetting()
+  const scopeStr = `scope.${scope}` as keyof wx.AuthSetting
 
-const authorize = (scope: keyof typeof authMap) =>
-  wxp
-    .getSetting()
-    .catch(() => {
-      throw new Error(`getSetting获取${scope}授权设置失败`)
-    })
-    .then(res => {
-      const authScope = `scope.${scope}` as keyof wx.AuthSetting
-      if (!res.authSetting[authScope]) {
-        if (!currentAuthRequest) {
-          // 查看当前是否正在授权，等待之前的授权进行完
-          currentAuthRequest = makeAuthReq(scope)
-        } else {
-          currentAuthRequest = currentAuthRequest.then(() => makeAuthReq(scope))
-        }
-        return currentAuthRequest
-      }
-      return
-    })
+  if (!settings.authSetting[scopeStr]) {
+    throw new Error("授权失败")
+  }
+}
 
-export { authorize }
+export async function authorize(scope: AuthScope) {
+  const setting = await wxp.getSetting().catch(() => {
+    throw new Error(`getSetting获取${scope}授权设置失败`)
+  })
+
+  const authScope = `scope.${scope}` as keyof wx.AuthSetting
+  const authState = setting.authSetting[authScope]
+
+  if (authState === undefined) {
+    return wxp.authorize({ scope: `scope.${scope}` })
+  } else if (authState === false) {
+    return goOpenSetting(scope)
+  } else {
+    return
+  }
+}
