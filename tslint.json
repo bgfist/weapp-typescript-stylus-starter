@@ -17,6 +17,6 @@
     "no-object-literal-type-assertion": false
   },
   "linterOptions": {
-    "exclude": ["src/wxs/*.wxs"]
+    "exclude": ["src/wxs/*.wxs", "src/libs/**"]
   }
 }

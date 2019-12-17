@@ -1,0 +1,47 @@
+font-normal()
+  font-family PingFangSC-Regular, sans-serif
+  font-weight 400
+
+font-bold()
+  font-family PingFangSC-Medium
+  font-weight 500
+
+$divider-width = 1rpx
+
+// 分隔线
+divider(direction = bottom)
+  border-{direction} $divider-width solid #EDEDED
+
+divider-vertical(height = auto)
+  width $divider-width
+  height height
+  background-color #D8D8D8
+
+overflow-ellipsis(max-length)
+  white-space nowrap
+  overflow hidden
+  text-overflow ellipsis
+  width max-length
+
+empty-text(text)
+  &:empty:after
+    content text
+    {block}
+
+iphoneX()
+  // iphoneX、iphoneXs
+  @media only screen and (device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3)
+    {block}
+
+  // iphone Xs Max
+  @media only screen and (device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3)
+    {block}
+
+  // iphone XR
+  @media only screen and (device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2)
+    {block}
+
+iphoneX-pdb()
+  +iphoneX()
+    padding-bottom 34px
+    padding-bottom constant(safe-area-inset-bottom)

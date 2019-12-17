@@ -9,6 +9,10 @@
       {
         "type": "regexp",
         "value": "^package\\.json|\\.npmrc|package-lock\\.json|yarn\\.lock$"
+      },
+      {
+        "type": "folder",
+        "value": "styles"
       }
     ]
   },

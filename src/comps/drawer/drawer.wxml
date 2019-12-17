@@ -1,0 +1,5 @@
+<view class="modal modal--{{modalVisible? 'open' : 'close'}}" bind:tap="closeModal" bind:touchstart="onDragging" bind:touchmove="onDragging" bind:touchend="onDragged">
+  <view class="drawer {{position==='right'?'drawer--right':''}}" style="width:{{width}}" catch:tap="noop">
+    <slot></slot>
+  </view>
+</view>

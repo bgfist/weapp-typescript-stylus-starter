@@ -1,0 +1,59 @@
+<view class="page" wx:if="{{!fixTextArea}}">
+  <view class="page__main">
+    <view class="form-section" wx:for="{{formFields}}" wx:for-item="section" wx:key="{{index}}">
+      <view class="form-section__item" wx:for="{{section}}" wx:for-item="field" wx:key="{{index}}">
+        <view class="form-section__label {{field.required?'form-section__label--required':''}}">
+          {{field.label}}
+        </view>
+        <picker wx:if="{{field.type==='date'}}" mode="date" fields="{{field.valueType}}" class="form-section__picker" bind:change="onDateFieldInput" value="{{form[field.name]}}" start="{{field.limit==='past'?'':futureDateMin}}" end="{{field.limit==='past'?pastDateMax:''}}" data-field="{{field.name}}" disabled="{{formDisabledFields[field.name]}}">
+          <view class="form-section__label">{{form[field.name]}}</view>
+          <image class="form-section__arrow" src="/images/icon-arrow-right.png"></image>
+        </picker>
+        <picker wx:if="{{field.type==='selector' || field.type==='switch'}}" mode="selector" class="form-section__picker" bind:change="onFieldInput" value="{{form[field.name]}}" data-field="{{field.name}}" range="{{field.valueType}}" range-key="label" disabled="{{formDisabledFields[field.name]}}">
+          <view class="form-section__label">{{form[field.name] != 0 ? field.valueType[form[field.name]].label : ''}}</view>
+          <image class="form-section__arrow" src="/images/icon-arrow-right.png"></image>
+        </picker>
+        <input wx:if="{{field.type==='input'}}" type="{{field.valueType}}" class="form-section__input" placeholder="请输入" placeholder-class="form-section__placeholder" bindinput="onFieldInput" value="{{form[field.name]}}" data-field="{{field.name}}" disabled="{{formDisabledFields[field.name]}}"/>
+        <input wx:if="{{field.type==='percent'}}" type="digit" class="form-section__input" placeholder="请输入" placeholder-class="form-section__placeholder" bindinput="onFieldInput" value="{{form[field.name]}}" data-field="{{field.name}}" disabled="{{formDisabledFields[field.name]}}"/>
+        <textarea wx:if="{{field.type==='textarea'}}" class="form-section__textarea form-section__textarea--small" placeholder="请输入" placeholder-class="form-section__placeholder" bindinput="onFieldInput" value="{{form[field.name]}}" data-field="{{field.name}}" disabled="{{formDisabledFields[field.name]}}"/>
+        <slot wx:if="{{field.type==='custom'}}" name="{{field.name}}"></slot>
+      </view>
+    </view>
+  </view>
+  <view class="form-section form-section--fix-iphoneX">
+    <view class="form-section__operation">
+      <button class="form-section__button" hover-class="form-section__button--hover" bind:tap="submit" loading="{{submitting}}">
+        {{submitText}}
+      </button>
+    </view>
+  </view>
+</view>
+<view wx:else>
+  <view class="form-section" wx:for="{{formFields}}" wx:for-item="section" wx:key="{{index}}">
+    <view class="form-section__item" wx:for="{{section}}" wx:for-item="field" wx:key="{{index}}">
+      <view class="form-section__label {{field.required?'form-section__label--required':''}}">
+        {{field.label}}
+      </view>
+      <picker wx:if="{{field.type==='date'}}" mode="date" fields="{{field.valueType}}" class="form-section__picker" bind:change="onDateFieldInput" value="{{form[field.name]}}" start="{{field.limit==='past'?'':futureDateMin}}" end="{{field.limit==='past'?pastDateMax:''}}" data-field="{{field.name}}" disabled="{{formDisabledFields[field.name]}}">
+        <view class="form-section__label">{{form[field.name]}}</view>
+        <image class="form-section__arrow" src="/images/icon-arrow-right.png"></image>
+      </picker>
+      <picker wx:if="{{field.type==='selector' || field.type==='switch'}}" mode="selector" class="form-section__picker" bind:change="onFieldInput" value="{{form[field.name]}}" data-field="{{field.name}}" range="{{field.valueType}}" range-key="label" disabled="{{formDisabledFields[field.name]}}">
+        <view class="form-section__label">{{form[field.name] != 0 ? field.valueType[form[field.name]].label : ''}}</view>
+        <image class="form-section__arrow" src="/images/icon-arrow-right.png"></image>
+      </picker>
+      <city-picker wx:if="{{field.type==='city'}}" value="{{form[field.name]}}" data-field="{{field.name}}" bind:pick="onFieldInput" disabled="{{formDisabledFields[field.name]}}"></city-picker>
+      <input wx:if="{{field.type==='input'}}" type="{{field.valueType}}" class="form-section__input" placeholder="请输入" placeholder-class="form-section__placeholder" bindinput="onFieldInput" value="{{form[field.name]}}" data-field="{{field.name}}" disabled="{{formDisabledFields[field.name]}}"/>
+      <input wx:if="{{field.type==='percent'}}" type="digit" class="form-section__input" placeholder="请输入" placeholder-class="form-section__placeholder" bindinput="onFieldInput" value="{{form[field.name]}}" data-field="{{field.name}}" disabled="{{formDisabledFields[field.name]}}"/>
+      <textarea wx:if="{{field.type==='textarea'}}" class="form-section__textarea form-section__textarea--small" placeholder="请输入" placeholder-class="form-section__placeholder" bindinput="onFieldInput" value="{{form[field.name]}}" data-field="{{field.name}}" disabled="{{formDisabledFields[field.name]}}"/>
+      <slot wx:if="{{field.type==='custom'}}" name="{{field.name}}"></slot>
+    </view>
+  </view>
+  <view class="form-section form-section--fix-iphoneX">
+    <view class="form-section__operation">
+      <button class="form-section__button" hover-class="form-section__button--hover" bind:tap="submit" loading="{{submitting}}">
+        {{submitText}}
+      </button>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,36 @@
+@import ('../../styles/mixins.styl')
+
+.modal
+  position fixed // 必须用fixed，不然页面会左右可滑动
+  z-index 9999
+  left 0
+  top 0
+  right 0
+  bottom 0
+  // will-change: background-color visibility; // will-change在小程序里有bug，不要用
+  transition background-color 0.3s, visibility 0.3s
+
+  &--open
+    visibility visible
+    background-color rgba(0, 0, 0, 0.6)
+
+  &--close
+    visibility hidden
+    background-color transparent
+
+.drawer
+  height 100%
+  background-color white
+  transition transform 0.5s
+
+  &--right
+    float right
+
+  .modal--open &
+    transform translateX(0)
+
+  .modal--close &
+    transform translateX(-100%)
+
+  .modal--close &--right
+    transform translateX(100%)

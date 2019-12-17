@@ -1,9 +1,12 @@
 {
   "files.exclude": {
-    "src/**/{*.js,*.js.map,*.wxss}": true,
-    "src/{node_modules,miniprogram_npm}": true
+    "src/**/{*.js,*.js.map}": { "when": "$(basename).ts" },
+    "src/**/*.wxss": { "when": "$(basename).styl" }
   },
   "typescript.tsdk": "node_modules/typescript/lib",
   "stylusSupremacy.tabStopChar": "  ",
-  "stylusSupremacy.alwaysUseExtends": true
+  "stylusSupremacy.alwaysUseExtends": true,
+  "stylusSupremacy.insertBraces": false,
+  "stylusSupremacy.insertColons": false,
+  "stylusSupremacy.insertSemicolons": false
 }

@@ -1,0 +1,97 @@
+@import ('../../styles/mixins.styl')
+
+.form-section
+  background-color white
+  margin-top 20rpx
+  font-size 30rpx
+
+  &--fix-iphoneX
+    iphoneX-pdb()
+
+  &__item
+    box-sizing border-box
+    padding 0 30rpx
+    display flex
+    flex-wrap wrap
+    justify-content space-between
+    align-items center
+
+    &:not(:last-child)
+      divider()
+
+      ^[1]--nodivider&
+        border-bottom unset
+
+  &__space
+    flex 1
+
+  &__icon
+    width 48rpx
+    height 48rpx
+    margin-right 20rpx
+
+  &__label
+    display inline-block
+    color #333333
+    line-height 104rpx
+    height 104rpx
+
+    &--required:after
+      content '*'
+      color #FF7300
+
+  &__input
+    width 400rpx
+    text-align right
+
+  &__placeholder
+    color #999999
+
+  &__textarea
+    box-sizing border-box
+    width 100%
+    height 316rpx
+    line-height 1.4 // 正常行间距
+
+    &--small
+      height 94rpx
+
+  &__picker
+    text-align right
+
+    .form-section__label
+      overflow-ellipsis(350rpx)
+      vertical-align middle
+
+      +empty-text('请选择')
+        @extends .form-section__placeholder
+
+      &:not(:empty)
+        color #333333 // iOS上两种情况都得设置
+
+    &[disabled] ^[0]__arrow
+      display none
+
+  &__arrow
+    margin-left 16rpx
+    width 16rpx
+    height 25rpx
+    vertical-align middle
+
+  &__operation
+    padding 30rpx
+
+  &__button
+    height 88rpx
+    line-height 88rpx
+    font-size 32rpx
+    background-color #3391EC
+    color #FFFFFF
+    border-radius 8rpx
+    text-align center
+
+    &:after
+      display none // 去掉自带的边框
+
+    &--hover
+      opacity 0.9
