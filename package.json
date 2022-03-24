@@ -23,7 +23,7 @@
     "husky": "^2.5.0",
     "jest": "^24.8.0",
     "lint-staged": "^8.2.1",
-    "minimist": "^1.2.0",
+    "minimist": "^1.2.6",
     "prettier": "^1.18.2",
     "stylus": "^0.54.7",
     "stylus-supremacy": "^2.12.7",
